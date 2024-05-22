@@ -1,1 +1,4 @@
 # doctrineRAG
+This project aims to establish a code-base for a local Retrieval-Augmented Generation (RAG) application focused on military doctrine. Although simple RAGs will suffice for most use-cases, there may need to be some customizations for embedding, chunking, and prompting. Additionally, specific LLMs might be the most useful depending on the type of doctrine uploaded.
+
+An important consideration when building this project was the need for an *offline* platform. Although only unclassified information is planned to be added to the local RAG database (not included in this repository), it is possible for potential users to upload more sensitive information of their own volition. To that end, I do not want to personally be held responsible for enabling such nonsense and I also just want to make sure my own data remains as private as possible.

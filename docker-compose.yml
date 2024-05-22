@@ -1,0 +1,46 @@
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama:/root/.ollama
+    pull_policy: always
+    restart: unless-stopped
+    networks:
+      - doctrine-rag
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: ['gpu']
+
+  ollama-webui:
+      image: ghcr.io/open-webui/open-webui:cuda
+      container_name: open-webui
+      ports:
+        - 8080:8080
+      volumes:
+        - open-webui:/app/backend/data
+      pull_policy: always
+      restart: unless-stopped
+      environment:
+        - OLLAMA_BASE_URLS=http://ollama:11434
+      networks:
+        - doctrine-rag
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: ['gpu']
+
+networks:
+  doctrine-rag:
+
+volumes:
+  ollama: {}
+  open-webui: {}
